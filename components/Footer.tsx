@@ -43,7 +43,8 @@ export function Footer() {
             <span>CIN: {company.cin}</span>
             <span>GSTIN: {company.gstin}</span>
             <Link href="/vendor-registration">Vendor Registration</Link>
-            <Link href="/admin/vendors">Admin Review</Link>
+            <Link href="/admin/enquiries">Enquiry Review</Link>
+            <Link href="/admin/vendors">Vendor Review</Link>
           </div>
         </div>
       </div>
