@@ -39,7 +39,7 @@ export async function POST(
       prefix
     );
 
-    const { error } = await supabase
+    const { data, error } = await supabase
       .from("vendor_applications")
       .update({
         status: "approved",
@@ -47,10 +47,16 @@ export async function POST(
         reviewed_at: new Date().toISOString()
       })
       .eq("id", id)
-      .eq("status", "pending_review");
+      .eq("status", "pending_review")
+      .select("id")
+      .single();
 
     if (error) {
       throw error;
+    }
+
+    if (!data) {
+      throw new Error("Vendor is not pending review.");
     }
 
     return NextResponse.json({ vendorCode });

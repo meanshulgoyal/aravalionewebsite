@@ -20,6 +20,36 @@ const requiredDocuments = [
   "cancelledCheque"
 ];
 
+type DocumentPaths = Record<string, string | null>;
+
+type VendorRow = {
+  document_paths: DocumentPaths | null;
+  [key: string]: unknown;
+};
+
+async function createVendorDocumentUrls(
+  supabase: NonNullable<ReturnType<typeof getSupabaseAdmin>>,
+  documentPaths: DocumentPaths | null
+) {
+  const bucket = process.env.SUPABASE_VENDOR_BUCKET || "vendor-documents";
+  const entries = Object.entries(documentPaths || {});
+  const urls: Record<string, string | null> = {};
+
+  await Promise.all(
+    entries.map(async ([key, path]) => {
+      if (!path) {
+        urls[key] = null;
+        return;
+      }
+
+      const { data } = await supabase.storage.from(bucket).createSignedUrl(path, 60 * 30);
+      urls[key] = data?.signedUrl || null;
+    })
+  );
+
+  return urls;
+}
+
 export async function POST(request: Request) {
   try {
     const form = await request.formData();
@@ -120,15 +150,29 @@ export async function GET(request: Request) {
         vendors: [
           {
             id: "demo-vendor-1",
+            application_id: "AO-VAPP-DEMO-0001",
             legal_name: "Demo Material Supplier Pvt Ltd",
             trade_name: "Demo Aggregates",
+            entity_type: "Private Limited",
             category: "Material Supplier",
+            gstin: "23ABCDE1234F1Z5",
+            pan: "ABCDE1234F",
+            msme_number: "UDYAM-DEMO-0001",
+            registered_address: "Demo Industrial Area, Gwalior, Madhya Pradesh",
             status: "pending_review",
             vendor_code: null,
+            reviewed_at: null,
             created_at: new Date().toISOString(),
             contact_person: "Demo Contact",
             mobile: "+91-9000000000",
-            email: "demo@example.com"
+            email: "demo@example.com",
+            bank_details: {
+              bank_name: "Demo Bank",
+              account_number: "0000000000",
+              ifsc: "DEMO0000001"
+            },
+            document_paths: {},
+            document_urls: {}
           }
         ]
       });
@@ -139,7 +183,27 @@ export async function GET(request: Request) {
     const { data, error } = await supabase
       .from("vendor_applications")
       .select(
-        "id, legal_name, trade_name, category, status, vendor_code, created_at, contact_person, mobile, email"
+        [
+          "id",
+          "application_id",
+          "legal_name",
+          "trade_name",
+          "entity_type",
+          "category",
+          "gstin",
+          "pan",
+          "msme_number",
+          "registered_address",
+          "contact_person",
+          "mobile",
+          "email",
+          "bank_details",
+          "document_paths",
+          "status",
+          "vendor_code",
+          "reviewed_at",
+          "created_at"
+        ].join(", ")
       )
       .order("created_at", { ascending: false })
       .limit(50);
@@ -148,7 +212,18 @@ export async function GET(request: Request) {
       throw error;
     }
 
-    return NextResponse.json({ vendors: data });
+    const vendorRows = (data || []) as unknown as VendorRow[];
+    const vendors = await Promise.all(
+      vendorRows.map(async (vendor) => ({
+        ...vendor,
+        document_urls: await createVendorDocumentUrls(
+          supabase,
+          vendor.document_paths
+        )
+      }))
+    );
+
+    return NextResponse.json({ vendors });
   } catch (error) {
     return NextResponse.json(
       { error: error instanceof Error ? error.message : "Unable to load vendors." },
