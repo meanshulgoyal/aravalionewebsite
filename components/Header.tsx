@@ -34,6 +34,9 @@ export function Header() {
             <span className="block text-xs font-semibold text-mineral">
               {company.tagline}
             </span>
+            <span className="block text-[11px] font-bold text-steel">
+              {company.groupLine}
+            </span>
           </span>
         </Link>
 

@@ -17,6 +17,7 @@ export const company = {
   name: "ARAVALI ONE PRIVATE LIMITED",
   shortName: "ARAVALI ONE",
   tagline: "Execution with Integrity",
+  groupLine: "A unit of Aravali India",
   registeredOffice:
     "001, Royal Residency, Vivekanand Colony, Thatipur, Gwalior 474011, Madhya Pradesh",
   operatingBase: "City Center, Gwalior, Madhya Pradesh",

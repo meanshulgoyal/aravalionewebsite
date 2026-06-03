@@ -40,7 +40,10 @@ export default function HomePage() {
           <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(24,33,47,0.90),rgba(24,33,47,0.66)_42%,rgba(24,33,47,0.18)_76%)]" />
           <div className="section-shell grid min-h-[calc(86svh-74px)] content-center py-16">
             <div className="max-w-3xl">
-              <p className="text-sm font-black uppercase text-sky-100">{company.tagline}</p>
+              <div className="inline-flex flex-col gap-1 rounded-lg border border-white/20 bg-white/10 px-4 py-3 backdrop-blur-sm">
+                <p className="text-sm font-black uppercase text-sky-100">{company.tagline}</p>
+                <p className="text-xs font-extrabold uppercase text-slate-100">{company.groupLine}</p>
+              </div>
               <h1 className="mt-4 text-balance text-5xl font-black leading-[1.02] sm:text-6xl lg:text-7xl">
                 {company.name}
               </h1>
