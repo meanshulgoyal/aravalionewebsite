@@ -18,7 +18,7 @@ Premium corporate Next.js website for ARAVALI ONE PRIVATE LIMITED with public co
    npm install
    ```
 
-2. Copy `.env.example` to `.env.local` and update portal/Supabase values. Set `NEXT_PUBLIC_SITE_URL` to the canonical site origin (for example, `https://www.example.com`) before a production build. If this value is missing in production, canonical and social absolute URLs are omitted until it is configured; malformed or non-HTTPS production values are rejected.
+2. Copy `.env.example` to `.env.local` and update portal/Supabase values. Set `NEXT_PUBLIC_SITE_URL` to the canonical site origin `https://www.aravalione.in`. Production defaults to this verified site origin when the variable is unset; local development uses `http://localhost:3000`. Malformed or non-HTTPS production values are rejected.
 3. Run the development server:
 
    ```powershell
@@ -29,8 +29,8 @@ The forms return demo IDs when Supabase variables are missing. Live storage and 
 
 ## SEO and Social Sharing
 
-- `NEXT_PUBLIC_SITE_URL` must be the final canonical HTTPS origin, with no path, query or fragment.
-- When `NEXT_PUBLIC_SITE_URL` is configured, the App Router emits canonical, Open Graph and Twitter metadata and a 1200 × 630 branded preview image.
+- `NEXT_PUBLIC_SITE_URL` is the canonical HTTPS origin `https://www.aravalione.in` by default, with no path, query or fragment.
+- The App Router emits canonical, Open Graph and Twitter metadata and a 1200 × 630 branded preview image using `https://www.aravalione.in` (or the configured `NEXT_PUBLIC_SITE_URL`).
 - `/sitemap.xml` lists the public home page. `/robots.txt` allows public crawling and excludes admin/API paths.
 - Vendor registration is available to users but marked `noindex`.
 

@@ -28,7 +28,7 @@ Create/login:
 5. Environment Variables add karein:
 
 ```text
-NEXT_PUBLIC_SITE_URL=https://your-domain.com
+NEXT_PUBLIC_SITE_URL=https://www.aravalione.in
 NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
 SUPABASE_SERVICE_ROLE_KEY=your-supabase-service-role-key
 SUPABASE_ENQUIRY_BUCKET=enquiry-documents
@@ -39,7 +39,7 @@ NEXT_PUBLIC_EMPLOYEE_PORTAL_URL=https://your-software-employee-url
 NEXT_PUBLIC_VENDOR_PORTAL_URL=https://your-software-vendor-url
 ```
 
-`NEXT_PUBLIC_SITE_URL` canonical production origin hai: sirf `https://` domain, bina path, query ya fragment ke. Iska value production ke actual primary domain (www ya apex jo aapne select kiya ho) se match hona chahiye. Production me ye missing ho to canonical aur social absolute URL metadata emit nahi hoga; galat localhost URL publish nahi hoga. Sahi domain set karne ke baad redeploy karein.
+`NEXT_PUBLIC_SITE_URL` canonical production origin hai: sirf `https://` domain, bina path, query ya fragment ke. Iska value production ke canonical domain se match hona chahiye. Aravali One ke current public website ke liye `https://www.aravalione.in` use karein. Code me bhi isi production origin ka fallback hai; local development me hi localhost use hota hai.
 
 6. Deploy button click karein.
 
