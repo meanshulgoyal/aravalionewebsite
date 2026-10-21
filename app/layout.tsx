@@ -7,16 +7,14 @@ const description =
   "ARAVALI ONE PRIVATE LIMITED delivers infrastructure material supply, mining, crushing, logistics and documentation-led execution across India.";
 
 export const metadata: Metadata = {
-  metadataBase: getSiteUrl(),
+  metadataBase: getSiteUrl() ?? undefined,
   title: {
     default: `${company.shortName} | ${company.tagline}`,
     template: `%s | ${company.shortName}`
   },
   description,
-  alternates: {
-    canonical: "/"
-  },
-  openGraph: {
+  alternates: getSiteUrl() ? { canonical: "/" } : undefined,
+  openGraph: getSiteUrl() ? {
     type: "website",
     locale: "en_IN",
     siteName: company.name,
@@ -25,19 +23,19 @@ export const metadata: Metadata = {
     url: "/",
     images: [
       {
-        url: "/opengraph-image",
+        url: "/social-preview",
         width: 1200,
         height: 630,
         alt: `${company.name} — ${company.tagline}`
       }
     ]
-  },
-  twitter: {
+  } : undefined,
+  twitter: getSiteUrl() ? {
     card: "summary_large_image",
     title: `${company.shortName} | ${company.tagline}`,
     description,
-    images: ["/opengraph-image"]
-  },
+    images: ["/social-preview"]
+  } : undefined,
   icons: {
     icon: "/favicon.svg"
   }

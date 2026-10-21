@@ -1,16 +1,10 @@
 const developmentUrl = "http://localhost:3000";
 
-export function getSiteUrl(): URL {
+export function getSiteUrl(): URL | null {
   const configuredUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
 
   if (!configuredUrl) {
-    if (process.env.NODE_ENV === "production") {
-      throw new Error(
-        "NEXT_PUBLIC_SITE_URL must be set to the canonical production origin."
-      );
-    }
-
-    return new URL(developmentUrl);
+    return process.env.NODE_ENV === "production" ? null : new URL(developmentUrl);
   }
 
   let parsedUrl: URL;
@@ -28,7 +22,7 @@ export function getSiteUrl(): URL {
     throw new Error("NEXT_PUBLIC_SITE_URL must use HTTPS outside local development.");
   }
 
-  if (parsedUrl.pathname !== "/" || parsedUrl.search || parsedUrl.hash) {
+  if (parsedUrl.pathname !== "/" || parsedUrl.search || parsedUrl.hash || parsedUrl.username || parsedUrl.password) {
     throw new Error("NEXT_PUBLIC_SITE_URL must contain only the canonical origin.");
   }
 

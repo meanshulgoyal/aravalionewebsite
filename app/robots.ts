@@ -10,6 +10,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/admin", "/api/"]
     },
-    sitemap: new URL("/sitemap.xml", siteUrl).toString()
+    sitemap: siteUrl ? new URL("/sitemap.xml", siteUrl).toString() : undefined
   };
 }

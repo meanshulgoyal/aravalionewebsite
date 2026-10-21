@@ -25,24 +25,28 @@ import {
 } from "@/data/site";
 
 export default function HomePage() {
-  const organizationJsonLd = {
+  const siteUrl = getSiteUrl();
+  const organizationJsonLd = siteUrl ? {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: company.name,
     legalName: company.name,
-    url: getSiteUrl().toString(),
-    logo: new URL("/images/aravali-one-logo-with-name.webp", getSiteUrl()).toString(),
+    url: siteUrl.toString(),
+    logo: new URL("/images/aravali-one-logo-with-name.webp", siteUrl).toString(),
     email: company.email,
     telephone: company.phone
-  };
+  } : null;
+
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(organizationJsonLd).replace(/</g, "\\u003c")
-        }}
-      />
+      {organizationJsonLd ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd).replace(/</g, "\\u003c")
+          }}
+        />
+      ) : null}
       <Header />
       <main>
         <section className="relative isolate overflow-hidden bg-ink text-white">

@@ -1,11 +1,10 @@
 import { ImageResponse } from "next/og";
 import { company } from "@/data/site";
 
-export const alt = `${company.name} — ${company.tagline}`;
+export const runtime = "edge";
 export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
 
-export default function OpenGraphImage() {
+export async function GET() {
   return new ImageResponse(
     (
       <div
@@ -52,6 +51,6 @@ export default function OpenGraphImage() {
         </div>
       </div>
     ),
-    size
+    { width: 1200, height: 630 }
   );
 }

@@ -39,7 +39,7 @@ NEXT_PUBLIC_EMPLOYEE_PORTAL_URL=https://your-software-employee-url
 NEXT_PUBLIC_VENDOR_PORTAL_URL=https://your-software-vendor-url
 ```
 
-`NEXT_PUBLIC_SITE_URL` canonical production origin hai: sirf `https://` domain, bina path, query ya fragment ke. Iska value production ke actual primary domain (www ya apex jo aapne select kiya ho) se match hona chahiye. Production build me ye missing ho to build fail hoga, taaki localhost ya galat domain canonical metadata me publish na ho.
+`NEXT_PUBLIC_SITE_URL` canonical production origin hai: sirf `https://` domain, bina path, query ya fragment ke. Iska value production ke actual primary domain (www ya apex jo aapne select kiya ho) se match hona chahiye. Production me ye missing ho to canonical aur social absolute URL metadata emit nahi hoga; galat localhost URL publish nahi hoga. Sahi domain set karne ke baad redeploy karein.
 
 6. Deploy button click karein.
 
@@ -56,7 +56,7 @@ NEXT_PUBLIC_VENDOR_PORTAL_URL=https://your-software-vendor-url
 ## 5. Final Checks
 
 - Home page open ho raha hai.
-- `/opengraph-image` branded 1200 × 630 social preview serve karta hai.
+- `/social-preview` branded 1200 × 630 social preview serve karta hai.
 - `/sitemap.xml` aur `/robots.txt` production domain par sahi render hote hain.
 - Contact enquiry ID generate ho rahi hai.
 - Vendor registration submit ho raha hai.
