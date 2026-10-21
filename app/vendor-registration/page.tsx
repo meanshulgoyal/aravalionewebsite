@@ -1,8 +1,21 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, CheckCircle2 } from "lucide-react";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { VendorRegistrationForm } from "@/components/VendorRegistrationForm";
+
+export const metadata: Metadata = {
+  title: "Vendor Registration",
+  description: "Register as a supplier or service provider with ARAVALI ONE PRIVATE LIMITED.",
+  alternates: {
+    canonical: "/vendor-registration"
+  },
+  robots: {
+    index: false,
+    follow: true
+  }
+};
 
 const reviewSteps = [
   "Application submitted with required KYC documents",

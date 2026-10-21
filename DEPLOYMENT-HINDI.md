@@ -30,7 +30,7 @@ Create/login:
 ```text
 NEXT_PUBLIC_SITE_URL=https://your-domain.com
 NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
-SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+SUPABASE_SERVICE_ROLE_KEY=your-supabase-service-role-key
 SUPABASE_ENQUIRY_BUCKET=enquiry-documents
 SUPABASE_VENDOR_BUCKET=vendor-documents
 ADMIN_REVIEW_TOKEN=strong-private-token
@@ -38,6 +38,8 @@ NEXT_PUBLIC_ADMIN_PORTAL_URL=https://your-software-admin-url
 NEXT_PUBLIC_EMPLOYEE_PORTAL_URL=https://your-software-employee-url
 NEXT_PUBLIC_VENDOR_PORTAL_URL=https://your-software-vendor-url
 ```
+
+`NEXT_PUBLIC_SITE_URL` canonical production origin hai: sirf `https://` domain, bina path, query ya fragment ke. Iska value production ke actual primary domain (www ya apex jo aapne select kiya ho) se match hona chahiye. Production build me ye missing ho to build fail hoga, taaki localhost ya galat domain canonical metadata me publish na ho.
 
 6. Deploy button click karein.
 
@@ -54,6 +56,8 @@ NEXT_PUBLIC_VENDOR_PORTAL_URL=https://your-software-vendor-url
 ## 5. Final Checks
 
 - Home page open ho raha hai.
+- `/opengraph-image` branded 1200 × 630 social preview serve karta hai.
+- `/sitemap.xml` aur `/robots.txt` production domain par sahi render hote hain.
 - Contact enquiry ID generate ho rahi hai.
 - Vendor registration submit ho raha hai.
 - Admin review token se vendor list load ho rahi hai.
