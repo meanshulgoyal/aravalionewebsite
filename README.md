@@ -18,8 +18,7 @@ Premium corporate Next.js website for ARAVALI ONE PRIVATE LIMITED with public co
    npm install
    ```
 
-2. Copy `.env.example` to `.env.local` and update portal/Supabase values.
-
+2. Copy `.env.example` to `.env.local` and update portal/Supabase values. Set `NEXT_PUBLIC_SITE_URL` to the canonical site origin `https://www.aravalione.in`. Production defaults to this verified site origin when the variable is unset; local development uses `http://localhost:3000`. Malformed or non-HTTPS production values are rejected.
 3. Run the development server:
 
    ```powershell
@@ -27,6 +26,13 @@ Premium corporate Next.js website for ARAVALI ONE PRIVATE LIMITED with public co
    ```
 
 The forms return demo IDs when Supabase variables are missing. Live storage and database writes start after `NEXT_PUBLIC_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` are configured.
+
+## SEO and Social Sharing
+
+- `NEXT_PUBLIC_SITE_URL` is the canonical HTTPS origin `https://www.aravalione.in` by default, with no path, query or fragment.
+- The App Router emits canonical, Open Graph and Twitter metadata and a 1200 × 630 branded preview image using `https://www.aravalione.in` (or the configured `NEXT_PUBLIC_SITE_URL`).
+- `/sitemap.xml` lists the public home page. `/robots.txt` allows public crawling and excludes admin/API paths.
+- Vendor registration is available to users but marked `noindex`.
 
 ## Supabase Setup
 
@@ -36,6 +42,7 @@ The forms return demo IDs when Supabase variables are missing. Live storage and 
    - `enquiry-documents`
    - `vendor-documents`
 4. Set these environment variables in Vercel:
+   - `NEXT_PUBLIC_SITE_URL`
    - `NEXT_PUBLIC_SUPABASE_URL`
    - `SUPABASE_SERVICE_ROLE_KEY`
    - `SUPABASE_ENQUIRY_BUCKET`
