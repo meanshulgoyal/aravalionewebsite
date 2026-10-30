@@ -18,10 +18,9 @@ export const company = {
   shortName: "ARAVALI ONE",
   tagline: "Execution with Integrity",
   groupLine: "A unit of Aravali India",
-  registeredOffice:
-    "001, Royal Residency, Vivekanand Colony, Thatipur, Gwalior 474011, Madhya Pradesh",
+  registeredOffice: "City Center, Gwalior, Madhya Pradesh",
   operatingBase: "City Center, Gwalior, Madhya Pradesh",
-  email: "anshulgoyal150191@gmail.com",
+  email: "akg@aravalione.in",
   phone: "+91-9261358414",
   cin: "U52290MP2025PTC079892",
   gstin: "23ABECA0989J1ZJ"
